@@ -2154,6 +2154,12 @@ beforeChatMessage: function(src, message, chan) {
         }
     }
 
+    // Auth tags 
+    if (sys.auth(src) = "3") {
+        sys.sendHtmlAll("<span style='color: " + sys.getColor(src) + "'><timestamp/><b>·°• Owner •°· " + sys.name(src) + "</b></span> » " + message.replace("&", "&amp;").replace("<", "&lt;"), channel);
+        sys.stopEvent();
+        this.afterChatMessage(src, message, channel);
+    }
     //Special donator
     /*if (name == "fear") {
         sys.sendHtmlAll("<span style='color: " + sys.getColor(src) + "'><timestamp/><b>±Fear: </b></span>" + message.replace("&", "&amp;").replace("<", "&lt;"),  channel);
