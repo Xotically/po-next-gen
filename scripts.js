@@ -22,7 +22,7 @@ var Config = {
     safaribot: "Safari",
     teamsbot: "Minun",
     // suspectvoting.js available, but not in use
-    Plugins: ["mafia.js", "amoebagame.js", "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "safari.js", "youtube.js", "autoteams.js"],
+    Plugins: ["mafia.js", "amoebagame.js",i "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "safari.js", "youtube.js", "autoteams.js"],
     Mafia: {
         bot: "Murkrow",
         norepeat: 5,
@@ -813,9 +813,9 @@ unban: function(type, src, tar, commandData) {
         else {
             banbot = normalbot;
         }
-    var verb = {"mute": "unmuted", "mban": "unbanned from Mafia", "smute": "secretly unmuted", "hmute": "unbanned from Hangman", "safban": "unbanned from Safari"}[type];
+    var verb = {"mute": "unlocked", "mban": "unbanned from Mafia", "smute": "secretly unmuted", "hmute": "unbanned from Hangman", "safban": "unbanned from Safari"}[type];
     var nomi = {"mute": "unmute", "mban": "mafia unban", "smute": "secret unmute", "hmute": "hangman unban", "safban": "safari unban"}[type];
-    var past = {"mute": "muted", "mban": "mafia banned", "smute": "secretly muted", "hmute": "hangman banned", "safban": "safari banned"}[type];
+    var past = {"mute": "locked", "mban": "mafia banned", "smute": "secretly muted", "hmute": "hangman banned", "safban": "safari banned"}[type];
     var sendAll =  {
         "smute": function(line) {
             banbot.sendAll(line, staffchannel);
@@ -1214,12 +1214,12 @@ afterChannelCreated : function (chan, name, src) {
 
 afterChannelJoin : function(player, chan) {
     if (typeof SESSION.channels(chan).topic != 'undefined') {
-        sys.sendMessage(player, "Welcome Message: " + SESSION.channels(chan).topic, chan);
+        sys.sendMessage(player, "Topic: " + SESSION.channels(chan).topic, chan);
         /*if (SESSION.channels(chan).topicSetter)
-            sys.sendMessage(player, "Set by: " + SESSION.channels(chan).topicSetter, chan);*/
+            sys.sendMessage(player, "Edited by: " + SESSION.channels(chan).topicSetter, chan);*/
     }
     if (SESSION.channels(chan).isChannelOperator(player)) {
-        sys.sendMessage(player, "±" + Config.channelbot + ": use /topic <topic> to change the welcome message of this channel", chan);
+        sys.sendMessage(player, "±" + Config.channelbot + ": Do not advertise. /rules ", chan);
     }
     if (SESSION.channels(chan).masters.length <= 0 && !this.isOfficialChan(chan)) {
         sys.sendMessage(player, "±" + Config.channelbot + ": This channel is unregistered. If you're looking to own this channel, type /register in order to prevent your channel from being stolen.", chan);
