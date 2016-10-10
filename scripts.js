@@ -2159,15 +2159,21 @@ beforeChatMessage: function(src, message, chan) {
         sys.sendHtmlAll("<span style='color: " + sys.getColor(src) + "'><timestamp/><b><font color='blue'>·°• Owner •°·</font> " + sys.name(src) + "</b></span> » " + message.replace("&", "&amp;").replace("<", "&lt;"), channel);
         sys.stopEvent();
         this.afterChatMessage(src, message, channel);
-        return;
-    }
-    //Special donator
-    /*if (name == "fear") {
-        sys.sendHtmlAll("<span style='color: " + sys.getColor(src) + "'><timestamp/><b>±Fear: </b></span>" + message.replace("&", "&amp;").replace("<", "&lt;"),  channel);
+    } else if (sys.auth(src) == "2") {
+        sys.sendHtmlAll("<span style='color: " + sys.getColor(src) + "'><timestamp/><b><font color='green'>·°• Admin •°·</font> " + sys.name(src) + "</b></span> » " + message.replace("&", "&amp;").replace("<", "&lt;"), channel);
+        sys.stopEvent();
+        this.afterChatMessage(src, message, channel);
+    } else if (sys.auth(src) == "1") {
+        sys.sendHtmlAll("<span style='color: " + sys.getColor(src) + "'><timestamp/><b><font color='red'>·°• Mod •°·</font> " + sys.name(src) + "</b></span> » " + message.replace("&", "&amp;").replace("<", "&lt;"), channel);
+        sys.stopEvent();
+        this.afterChatMessage(src, message, channel);
+    } else if (sys.auth(src) == "0") {
+        sys.sendHtmlAll("<span style='color: " + sys.getColor(src) + "'><timestamp/><b><font color='black'>·°• Safari •°·</font> " + sys.name(src) + "</b></span> » " + message.replace("&", "&amp;").replace("<", "&lt;"), channel);
         sys.stopEvent();
         this.afterChatMessage(src, message, channel);
         return;
-    }*/
+    }   
+    
 }, /* end of beforeChatMessage */
 
 
