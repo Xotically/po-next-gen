@@ -1,25 +1,25 @@
 // This is the official Pokemon Online Scripts
-// These scripts will only work on 2.0.00 or newer.
+// These scripts will only work on 2.0.00 or newer
 /*jshint laxbreak:true,shadow:true,undef:true,evil:true,trailing:true,proto:true,withstmt:true*/
 // You may change these variables as long as you keep the same type
 var Config = {
     base_url: "https://raw.githubusercontent.com/Rainzye/po-next-gen/master/",
     dataDir: "scriptdata/",
-    bot: "Dratini",
+    bot: "Dragonite",
     kickbot: "Blaziken",
     capsbot: "Exploud",
     channelbot: "Chatot",
-    checkbot: "Snorlax",
+    checkbot: "Safari",
     coinbot: "Meowth",
-    countbot: "CountBot",
+    countbot: "Safari",
     tourneybot: "Typhlosion",
     rankingbot: "Porygon",
     battlebot: "Blastoise",
-    commandbot: "CommandBot",
+    commandbot: "CommtandBo",
     querybot: "QueryBot",
     hangbot: "Unown",
     bfbot: "Goomy",
-    safaribot: "Tauros",
+    safaribot: "Safari",
     teamsbot: "Minun",
     // suspectvoting.js available, but not in use
     Plugins: ["mafia.js", "amoebagame.js", "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "safari.js", "youtube.js", "autoteams.js"],
@@ -1549,8 +1549,8 @@ afterLogIn : function(src) {
             return;
         }
     }*/
-    sys.sendMessage(src, "*** Type in /rules to see the rules and /commands to see the commands! ***");
-    sys.sendMessage(src, "±Official Side Channels: #Tournaments | #Safari | #Hangman | #Trivia | #Mafia");
+    sys.sendMessage(src, "*** A ***");
+    sys.sendMessage(src, "±Official Side Channels: #Tournaments | #Hangman | #Trivia | #Mafia");
 
     maxPlayersOnline = Math.max(sys.numPlayers(), maxPlayersOnline);
     if (maxPlayersOnline > sys.getVal("MaxPlayersOnline")) {
