@@ -6,16 +6,16 @@ var Config = {
     base_url: "https://raw.githubusercontent.com/Rainzye/po-next-gen/master/",
     dataDir: "scriptdata/",
     bot: "Dragonite",
-    kickbot: "Blaziken",
-    capsbot: "Exploud",
+    kickbot: "Safari",
+    capsbot: "Safari",
     channelbot: "Chatot",
     checkbot: "Safari",
     coinbot: "Meowth",
     countbot: "Safari",
-    tourneybot: "Typhlosion",
-    rankingbot: "Porygon",
+    tourneybot: "Charizard",
+    rankingbot: "Porygon2",
     battlebot: "Blastoise",
-    commandbot: "CommtandBo",
+    commandbot: "Pikachu",
     querybot: "QueryBot",
     hangbot: "Unown",
     bfbot: "Goomy",
@@ -696,7 +696,7 @@ issueBan : function(type, src, tar, commandData, maxTime) {
         else {
             banbot = normalbot;
         }
-        var verb = {"mute": "muted", "mban": "banned from Mafia", "smute": "secretly muted", "hmute": "banned from Hangman", "safban": "banned from Safari"}[type];
+        var verb = {"mute": "locked", "mban": "banned from Mafia", "smute": "secretly muted", "hmute": "banned from Hangman", "safban": "banned from Safari"}[type];
         var nomi = {"mute": "mute", "mban": "mafia ban", "smute": "secret mute", "hmute": "hangman ban", "safban": "safari ban"}[type];
         var sendAll =  {
             "smute": function(line) {
@@ -813,9 +813,9 @@ unban: function(type, src, tar, commandData) {
         else {
             banbot = normalbot;
         }
-    var verb = {"mute": "unmuted", "mban": "unbanned from Mafia", "smute": "secretly unmuted", "hmute": "unbanned from Hangman", "safban": "unbanned from Safari"}[type];
-    var nomi = {"mute": "unmute", "mban": "mafia unban", "smute": "secret unmute", "hmute": "hangman unban", "safban": "safari unban"}[type];
-    var past = {"mute": "muted", "mban": "mafia banned", "smute": "secretly muted", "hmute": "hangman banned", "safban": "safari banned"}[type];
+    var verb = {"mute": "unlocked", "mban": "unbanned from Mafia", "smute": "secretly unmuted", "hmute": "unbanned from Hangman", "safban": "unbanned from Safari"}[type];
+    var nomi = {"mute": "unlock", "mban": "mafia unban", "smute": "secret unmute", "hmute": "hangman unban", "safban": "safari unban"}[type];
+    var past = {"mute": "locked", "mban": "mafia banned", "smute": "secretly muted", "hmute": "hangman banned", "safban": "safari banned"}[type];
     var sendAll =  {
         "smute": function(line) {
             banbot.sendAll(line, staffchannel);
