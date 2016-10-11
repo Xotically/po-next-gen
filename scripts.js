@@ -1546,10 +1546,10 @@ afterLogIn : function(src) {
     /*if (sys.os(src) === "android" && sys.version(src) > 45 && sys.version(src) < 46) {
             sys.sendMessage(src, "Your client version is no longer compatible with the current server version. Please download the update at ?????");
             sys.kick(src);
-            return;
+            return;  
         }
     }*/
-    sys.sendMessage(src, "*** A ***");
+//     sys.sendMessage(src, "*** Type in ru***");
     sys.sendMessage(src, "±Official Side Channels: #Tournaments | #Hangman | #Trivia | #Mafia");
 
     maxPlayersOnline = Math.max(sys.numPlayers(), maxPlayersOnline);
