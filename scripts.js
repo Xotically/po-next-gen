@@ -696,7 +696,7 @@ issueBan : function(type, src, tar, commandData, maxTime) {
         else {
             banbot = normalbot;
         }
-        var verb = {"mute": "muted", "mban": "banned from Mafia", "smute": "secretly muted", "hmute": "banned from Hangman", "safban": "banned from Safari"}[type];
+        var verb = {"mute": "locked", "mban": "banned from Mafia", "smute": "secretly muted", "hmute": "banned from Hangman", "safban": "banned from Safari"}[type];
         var nomi = {"mute": "mute", "mban": "mafia ban", "smute": "secret mute", "hmute": "hangman ban", "safban": "safari ban"}[type];
         var sendAll =  {
             "smute": function(line) {
@@ -813,9 +813,9 @@ unban: function(type, src, tar, commandData) {
         else {
             banbot = normalbot;
         }
-    var verb = {"mute": "unmuted", "mban": "unbanned from Mafia", "smute": "secretly unmuted", "hmute": "unbanned from Hangman", "safban": "unbanned from Safari"}[type];
+    var verb = {"mute": "unlocked", "mban": "unbanned from Mafia", "smute": "secretly unmuted", "hmute": "unbanned from Hangman", "safban": "unbanned from Safari"}[type];
     var nomi = {"mute": "unmute", "mban": "mafia unban", "smute": "secret unmute", "hmute": "hangman unban", "safban": "safari unban"}[type];
-    var past = {"mute": "muted", "mban": "mafia banned", "smute": "secretly muted", "hmute": "hangman banned", "safban": "safari banned"}[type];
+    var past = {"mute": "locked", "mban": "mafia banned", "smute": "secretly muted", "hmute": "hangman banned", "safban": "safari banned"}[type];
     var sendAll =  {
         "smute": function(line) {
             banbot.sendAll(line, staffchannel);
@@ -1214,9 +1214,9 @@ afterChannelCreated : function (chan, name, src) {
 
 afterChannelJoin : function(player, chan) {
     if (typeof SESSION.channels(chan).topic != 'undefined') {
-        sys.sendMessage(player, "Welcome Message: " + SESSION.channels(chan).topic, chan);
+        sys.sendMessage(player, "Topic: " + SESSION.channels(chan).topic, chan);
         /*if (SESSION.channels(chan).topicSetter)
-            sys.sendMessage(player, "Set by: " + SESSION.channels(chan).topicSetter, chan);*/
+            sys.sendMessage(player, "Edited by: " + SESSION.channels(chan).topicSetter, chan);*/
     }
     if (SESSION.channels(chan).isChannelOperator(player)) {
         sys.sendMessage(player, "±" + Config.channelbot + ": use /topic <topic> to change the welcome message of this channel", chan);
@@ -1496,7 +1496,7 @@ cookieBanned: function(src) {
         if (cookie.indexOf(" ") > 1) {
             name = cookie.substr(cookie.indexOf(" ")+1);
         }
-        kickbot.sendAll(nonFlashing(sys.name(src)) + " was banned by cookie" + (name ? " [Original Name: " + nonFlashing(name) + "]." : "."), watchchannel);
+        kickbot.sendAll(nonFlashing(sys.name(src)) + " was permanently banned " + (name ? " [Original Name: " + nonFlashing(name) + "]." : "."), watchchannel);
         normalbot.sendMessage(src, "You are currently banned from the server. If you believe this to be an error, post here: http://pokemon-online.eu/forums/disciplinary-committee.43/");
         sys.kick(src);
         return true;
@@ -1549,8 +1549,8 @@ afterLogIn : function(src) {
             return;  
         }
     }*/
-//     sys.sendMessage(src, "*** Type in ru***");
-    sys.sendMessage(src, "±Official Side Channels: #Tournaments | #Hangman | #Trivia | #Mafia");
+//     sys.sendMessage(src, "*** All languages Allowed ***");
+    sys.sendMessage(src, "±Official Channels: #Developement ~ #Tournaments ~ #Hangman ~ #Trivia ~ #Mafia");
 
     maxPlayersOnline = Math.max(sys.numPlayers(), maxPlayersOnline);
     if (maxPlayersOnline > sys.getVal("MaxPlayersOnline")) {
@@ -1676,7 +1676,7 @@ afterChangeTeam : function(src)
     for (var team = 0; team < sys.teamCount(src); team++) {
         if (!tier_checker.has_legal_team_for_tier(src, team, sys.tier(src, team))) {
             tier_checker.find_good_tier(src, team);
-            normalbot.sendMessage(src, "You were placed into '" + sys.tier(src, team) + "' tier.");
+            normalbot.sendMessage(src, "You are in default '" + sys.tier(src, team) + "' tier.");
         }
     }
 
@@ -1702,7 +1702,7 @@ silence: function(src, minutes, chanName) {
     }
     var cid = sys.channelId(chanName);
     if (cid !== undefined) {
-        channelbot.sendAll(sys.name(src) + " called for " + duration + " silence in "+chanName+"!", cid);
+        channelbot.sendAll(sys.name(src) + " has restricted chat " + duration + " ∆ "+chanName+"!", cid);
         SESSION.channels(cid).muteall = true;
         if (doCall) {
             sys.delayedCall(function() {
@@ -1724,7 +1724,7 @@ silenceoff: function(src, chanName) {
             channelbot.sendMessage(src, "The channel is not muted.", channel);
             return;
         }
-        channelbot.sendAll("" + sys.name(src) + " cancelled the Minutes of Silence in "+chanName+"!", cid);
+        channelbot.sendAll("" + sys.name(src) + " cancelled the restriction in "+chanName+"∆", cid);
         SESSION.channels(cid).muteall = false;
     } else {
         normalbot.sendChanMessage("Use /silenceoff Channel Name");
@@ -1811,7 +1811,7 @@ beforeChatMessage: function(src, message, chan) {
         throttleMsg = true;
     }
     if (throttleMsg) {
-        normalbot.sendMessage(src, "Hi! Your message is too long, please make it shorter :3", channel);
+        normalbot.sendMessage(src, "Hi! Your message is too long, please make it shorter :)", channel);
         sys.stopEvent();
         return;
     }
@@ -1913,7 +1913,7 @@ beforeChatMessage: function(src, message, chan) {
 
     if (sys.auth(src) < 3 && SESSION.users(src).mute.active && isBlocked) {
         var muteinfo = SESSION.users(src).mute;
-        normalbot.sendMessage(src, "You are muted" + (muteinfo.by ? " by " + muteinfo.by : '')+". " + (muteinfo.expires > 0 ? "Mute expires in " + getTimeString(muteinfo.expires - parseInt(sys.time(), 10)) + ". " : '') + (muteinfo.reason ? "[Reason: " + muteinfo.reason + "]" : ''), channel);
+        normalbot.sendMessage(src, "You are locked" + (muteinfo.by ? " by " + muteinfo.by : '')+". " + (muteinfo.expires > 0 ? "Lock expires in " + getTimeString(muteinfo.expires - parseInt(sys.time(), 10)) + ". " : '') + (muteinfo.reason ? "[Reason: " + muteinfo.reason + "]" : ''), channel);
         sys.stopEvent();
         return;
     }
@@ -1928,9 +1928,9 @@ beforeChatMessage: function(src, message, chan) {
             } else {
                 expiry = "for " + getTimeString(expiry - parseInt(sys.time(), 10), 10);
             }
-            channelbot.sendMessage(src, "You are muted on this channel " + expiry + " by " + auth + "." + (reason === "N/A" ? "" : " [Reason: " + reason + "]"), channel);
+            channelbot.sendMessage(src, "You are locked in this channel " + expiry + " by " + auth + "." + (reason === "N/A" ? "" : " [Reason: " + reason + "]"), channel);
         } else {
-            channelbot.sendMessage(src, "You are muted on this channel.", channel);
+            channelbot.sendMessage(src, "You are locked in this channel.", channel);
         }
         sys.stopEvent();
         return;
@@ -2036,7 +2036,7 @@ beforeChatMessage: function(src, message, chan) {
 
     // Minutes of Silence
     if (SESSION.channels(channel).muteall && !SESSION.channels(channel).isChannelOperator(src) && sys.auth(src) === 0) {
-        normalbot.sendMessage(src, "Respect the minutes of silence!", channel);
+        normalbot.sendMessage(src, "Safari is on lockdown!", channel);
         sys.stopEvent();
         return;
     }
@@ -2215,8 +2215,8 @@ afterChatMessage : function(src, message, chan)
                 ++user.capsmutes;
                 if (user.smute.active) {
                     sys.sendMessage(src, message);
-                    capsbot.sendAll("" + sys.name(src) + " was muted for caps while smuted.", staffchannel);
-                    capsbot.sendAll("" + sys.name(src) + " was muted for caps while smuted.", watchchannel);
+                    capsbot.sendAll("" + sys.name(src) + " was locked for caps while smuted.", staffchannel);
+                    capsbot.sendAll("" + sys.name(src) + " was locked for caps while smuted.", watchchannel);
                 } else {
                     capsbot.sendAll(message, channel);
                     if (channel != staffchannel)
@@ -2236,7 +2236,7 @@ afterChatMessage : function(src, message, chan)
             }
         }
         else if (user.caps >= Math.floor(maxCaps / 2)) {
-            capsbot.sendMessage(src, "Warning: You may be muted for excessive usage of CAPS LOCK!", channel);
+            capsbot.sendMessage(src, "Warning: You may be locked for excessive usage of CAPS LOCK!", channel);
         }
     } else if (user.caps > 0) {
         user.caps -= 1;
@@ -2261,7 +2261,7 @@ afterChatMessage : function(src, message, chan)
         linecount = sys.channelId("Mafia") == channel ? linecount + 3 : linecount;
 
         if (user.floodcount > linecount) {
-            var message = "" + sys.name(src) + " was kicked " + (sys.auth(src) === 0 && officialChan ? "and muted for 1 hour " : "") + "for flood";
+            var message = "" + sys.name(src) + " was kicked " + (sys.auth(src) === 0 && officialChan ? "and locked for 1 hour " : "") + "for flood";
             if (officialChan) {
                 if (user.smute.active) {
                     sys.sendMessage(src, message);
@@ -2269,8 +2269,8 @@ afterChatMessage : function(src, message, chan)
                     kickbot.sendAll("" + sys.name(src) + " was kicked for flood whilst smuted.", watchchannel);
                 }
                 else if (user.mute.active) {
-                    kickbot.sendAll(message + " whilst muted. [Channel: "+sys.channel(channel)+"]", staffchannel);
-                    kickbot.sendAll(message + " whilst muted.  [Channel: "+sys.channel(channel)+"]", watchchannel);
+                    kickbot.sendAll(message + " whilst locked. [Channel: "+sys.channel(channel)+"]", staffchannel);
+                    kickbot.sendAll(message + " whilst locked.  [Channel: "+sys.channel(channel)+"]", watchchannel);
                 } else {
                     kickbot.sendAll(message, channel);
                     if (channel != staffchannel)
@@ -2294,7 +2294,7 @@ afterChatMessage : function(src, message, chan)
             }
         }
         else if (user.floodcount >= Math.floor(linecount / 2)) {
-            kickbot.sendMessage(src, "Warning: You may be muted for flooding the chat!", channel);
+            kickbot.sendMessage(src, "Warning: You may be locked for flooding the chat!", channel);
         }
     }
     SESSION.channels(channel).beforeMessage(src, message);
@@ -2410,7 +2410,7 @@ beforeChangeTier : function(src, team, oldtier, newtier) {
     }
     if (!tier_checker.has_legal_team_for_tier(src, team, newtier)) {
        sys.stopEvent();
-       normalbot.sendMessage(src, "Sorry, you can not change into that tier.");
+       normalbot.sendMessage(src, "Sorry, you cannot change into that tier.");
        tier_checker.find_good_tier(src, team);
     }
 },
