@@ -5,7 +5,7 @@
 var Config = {
     base_url: "https://raw.githubusercontent.com/Xotically/po-next-gen/master/",
     dataDir: "scriptdata/",
-    bot: "Dragonite",
+    bot: "Dragonite2",
     kickbot: "Blaziken",
     capsbot: "Exploud",
     channelbot: "Chatot",
