@@ -1,19 +1,40 @@
-// Official scripts for safari on pokemon online. Registry. Created by haunter & nakarou
+// ################  ############### ################ ############### ############## #####################
+// #                 #             # #                #             # #       ######          #
+// #                 #             # #                #             # #      ##               #
+// #                 #             # #                #             # #    ##                 #
+// #                 #             # #                #             # #  ####                 #
+// ###############   ############### ################ ############### #  ##########           #
+//               #   #             # #                #             # #           #           #
+//               #   #             # #                #             # #           #           #
+//               #   #             # #                #             # #           #           #
+//               #   #             # #                #             # #           #           #
+// ###############   #             # #                #             # #           # #####################
+// ***************************************************************************************************************
+// Official scripts for safari on pokemon online. Registry. Created by haunter.
 /*jshint laxbreak:true,shadow:true,undef:true,evil:true,trailing:true,proto:true,withstmt:true*/
-// We do not permit use of these scripts. Trying to host are scripts may result in force takedown attack.
-var Config = {
+// We do not permit use of these scripts. Trying to host are scripts may result in a force takedown DDos attack.
+// We do not permit use of these scripts. Trying to host are scripts may result in a requested registry ban.
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// | *** Contributors & Credits ***                                                                              |
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// safari owners: haunter: • (developer)
+// safari administrators: • (angie) (stealthy) server staff
+// safari moderators: • (none)
+// Main Website: http://safari-zone.boards.net/#
+// Official Webclient: http://bit.do/safari-webserver
+    var Config = {
     base_url: "https://raw.githubusercontent.com/Xotically/safari/master/scripts.js",
     dataDir: "scriptdata/",
     bot: "Safari",
-    kickbot: "KICKBOT",
-    capsbot: "CAPSBOT",
-    channelbot: "</b><font color = purple> (Main) /commands<b>",
-    checkbot: "Pikachu",
-    coinbot: "Meowth",
-    countbot: "Safari",
-    tourneybot: "Tourbot",
-    rankingbot: "Rankbot",
-    battlebot: "</b><font color = red>Safari<b>",
+    kickbot: "Kicked",
+    capsbot: "Restricted",
+    channelbot: "</b><font color = blue> (Official Safari)<b>",
+    checkbot: "Check",
+    coinbot: "Coin",
+    countbot: "Count",
+    tourneybot: "Tourney",
+    rankingbot: "Ranking",
+    battlebot: "</b><font color = red>(•.•)<b>",
     commandbot: "CommandBot",
     querybot: "QueryBot",
     hangbot: "Hangmanbot",
@@ -62,7 +83,7 @@ require = function require(module_name, retry) {
                     sys.sendAll("Error loading module " + module_name + ": " + e);
                 sys.writeToFile("scripts/"+module_name, sys.getFileContent("scripts/" + module_name + "-b"));
                 if (!retry) {
-                    require(module_name, true); //prevent loops
+                    require(module_name, true); // This is to prevent loops
                 }
             }
         }
@@ -360,7 +381,7 @@ youtubebot = new Bot(Config.youtubebot);
 
 var lastStatUpdate = new Date();
 poScript=({
-/* Executed every second */
+/* Executed per 1 second */
 step: function() {
     if (typeof callplugins == "function") callplugins("stepEvent");
 
@@ -475,7 +496,7 @@ init : function() {
     "*** Safari Rules ***",
     "",
     "1. This server is English:",
-    "- 'Profound unsophisticated rule breakers. Will be punished. Although we may just lock saves.",
+    "- 'Profound unsophisticated rule breakers. Will be punished. Although we may just lock your safari saves.",
     "2. No advertising, excessive messages or caps, inappropriate/obscene links, or text art:",
     "- Do not post links unless they are to notable sites (Youtube, Smogon, Serebii, etc). We are not interested in your start-up community. Do not monopolize the chat with large amounts of messages, or short ones in rapid succession. Do not advertise non-official channels without prior approval. Posting ASCII art is punishable with a ban, as is posting anything with any type of pornography. Posting social media (Twitter/Facebook/kik) accounts is also punishable.",
     "3. Use Find Battle, or join tournaments instead of asking in the main chat:",
@@ -636,7 +657,7 @@ issueBan : function(type, src, tar, commandData, maxTime) {
         }[type];
 
         var expires = 0;
-        var defaultTime = {"mute": "24h", "mban": "1d", "smute": "0", "hmute": "1d", "safban": "1d"}[type];
+        var defaultTime = {"mute": "15h", "mban": "15m", "smute": "0", "hmute": "15m", "saflock": "1h"}[type];
         var reason = "";
         var timeString = "";
         var data = commandData;
@@ -1357,7 +1378,7 @@ afterLogIn : function(src) {
         sys.saveVal("MaxPlayersOnline", maxPlayersOnline);
     }
       countbot.sendMessage(src, (typeof(this.startUpTime()) == "string" ?  "Uptime: " + this.startUpTime() + ".  " : "")  + "Players online at once: " + sys.getVal("MaxPlayersOnline") + ".");
-    sys.sendHtmlMessage(src, "<font size=2 font color=green> Online http://bit.do/safari-webserver-com/");
+    sys.sendHtmlMessage(src, "<font size=2 font color=green> Online http://bit.do/safari-webserver");
     sys.sendHtmlMessage(src, "<font size=3 font color=red> Report abusive users to authority.", 0);
     if (sys.name(src) == "haunter") {
     	sys.sendHtmlAll("<timestamp/><span style='color: " + sys.getColor(src) + "'><b><font size=3 font color=#000000>(+)</font> " + sys.name(src) + "</span><font size=2 font colorred> joined ", 0);
@@ -1366,7 +1387,7 @@ afterLogIn : function(src) {
     } else if (sys.auth(src) == 2) {
     	sys.sendHtmlAll("<timestamp/><span style='color: " + sys.getColor(src) + "'><b><font size=3 font color=#000000></font> " + sys.name(src) + "</span><font size=2 font color=red> joined", 0);
     } else if (sys.auth(src) == 3) {
-    	sys.sendHtmlAll(src, "<timestamp/><span style='color: " + sys.getColor(src) + "'><b><font size=3 font color=#002db3></font> " + sys.name(src) + "</span><font size=2 font color=blue> joined", 0);
+    	sys.sendHtmlMessage(src, "<timestamp/><span style='color: " + sys.getColor(src) +"'><b><font size=3 font color=#002db3><font size=2 font color=blue> joined");
     } else if (sys.auth(src) == 4) {
     	sys.sendHtmlMessage(src, "<timestamp/><span style='color: " + sys.getColor(src) + "'><b><font size=3 font color=#000000></font> " + sys.name(src) + "</span><font size=2 font color=purple> joined", 0);
     } else if (!sys.dbRegistered(sys.name(src))) {
@@ -1375,6 +1396,8 @@ afterLogIn : function(src) {
         sys.sendHtmlAll("<timestamp/><span style='color: " + sys.getColor(src) + "'><b><font size=3 font color=#000000>A wild </font> " + sys.name(src) + "</span><font size=2 font color=blue> Appeared!", 0);
     } 
     sys.sendHtmlMessage(src, "<font size=3 font color=green> Website: http://safari-zone.boards.net/# ");
+   
+    sys.sendMessage(src, "", channel);
 
     callplugins("afterLogIn", src);
 
