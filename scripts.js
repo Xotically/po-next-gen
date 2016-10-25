@@ -2,12 +2,12 @@
 /*jshint laxbreak:true,shadow:true,undef:true,evil:true,trailing:true,proto:true,withstmt:true*/
 // We do not permit use of these scripts. Trying to host are scripts may result in force takedown attack.
 var Config = {
-    base_url: "https://raw.githubusercontent.com/Rainzye/po-next-gen/master/scripts.js",
+    base_url: "https://raw.githubusercontent.com/Xotically/safari/master/scripts.js",
     dataDir: "scriptdata/",
     bot: "Safari",
     kickbot: "KICKBOT",
     capsbot: "CAPSBOT",
-    channelbot: "</b><font color = red> (Auth Help) /commands<b>",
+    channelbot: "</b><font color = purple> (Main) /commands<b>",
     checkbot: "Pikachu",
     coinbot: "Meowth",
     countbot: "Safari",
